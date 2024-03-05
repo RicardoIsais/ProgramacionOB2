@@ -13,10 +13,11 @@ public class Prenda {
     private double precioVenta;
     private int cantidad;
 
-    public Prenda(String tipo, String tamaño, String genero, double precioCompra) {
+    public Prenda(String tipo, String tamaño, String genero, double precioCompra, int cantidad) {
         this.codigo = ProcesosRopa.generaID(); 
         this.tipo = tipo;
         this.tamaño = tamaño;
+        this.cantidad = cantidad;
         this.genero = genero;
         this.precioCompra = precioCompra;
         ProcesosRopa procesosRopa = new ProcesosRopa();

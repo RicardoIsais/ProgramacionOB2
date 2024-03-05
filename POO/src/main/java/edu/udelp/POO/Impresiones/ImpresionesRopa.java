@@ -57,12 +57,13 @@ public class ImpresionesRopa {
                 break;
 
                 case 2:
+                	
                     System.out.println("Mostrando las prendas en el inventario:");
                     inventario.mostrarInventario();
                     break;
                 case 3:
                     inventario.mostrarInventarioVenta();
-                    System.out.println("Ingrese los IDs de las prendas a vender, separados por espacio, o escriba 'salir' para finalizar la compra:");
+                    System.out.println("Ingrese los IDs de las prendas a vender o escriba 'salir' para finalizar la compra:");
                     
                     double totalVenta = 0;
                     while (true) {

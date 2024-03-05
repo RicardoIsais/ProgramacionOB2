@@ -49,10 +49,8 @@ public class ImpresionesRopa {
                 System.out.print("Ingrese la cantidad: ");
                 int cantidad = scanner.nextInt();
                 scanner.nextLine(); 
-                for (int i = 0; i < cantidad; i++) {
-                    Prenda prenda = new Prenda(tipo, tamaño, genero, precioCompra,1);
-                    inventario.agregarPrenda(prenda);
-                }
+                Prenda prenda = new Prenda(tipo, tamaño, genero, precioCompra,cantidad);
+                inventario.agregarPrenda(prenda);
                 System.out.println(cantidad + " prendas de tipo " + tipo + " agregadas exitosamente.");
                 break;
 

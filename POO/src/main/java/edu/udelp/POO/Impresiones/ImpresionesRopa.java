@@ -61,27 +61,31 @@ public class ImpresionesRopa {
                     break;
                 case 3:
                     inventario.mostrarInventarioVenta();
-                    System.out.println("Ingrese los IDs de las prendas a vender o escriba 'salir' para finalizar la compra:");
+                    System.out.println("Ingrese el ID de la prenda a vender o escriba 'salir' para finalizar la compra:");
                     
                     double totalVenta = 0;
                     while (true) {
-                        String line = scanner.nextLine();
-                        if (line.equalsIgnoreCase("salir")) {
-                            break; 
+                        String idStr = scanner.nextLine();
+                        if (idStr.equalsIgnoreCase("salir")) {
+                            break;
                         }
                         
-                        String[] ids = line.split(" ");
-                        for (String idStr : ids) {
-                            Prenda prendaSeleccionada = inventario.obtenerPrendaPorId(idStr);
-                            if (prendaSeleccionada != null) {
-                            	inventarioVenta.agregarPrenda(prendaSeleccionada);
-                                System.out.println("Vendiendo: " + prendaSeleccionada.toStringVenta());
-                                totalVenta += prendaSeleccionada.getPrecioVenta() * prendaSeleccionada.getCantidad();
-                                inventario.eliminarPrenda(idStr); 
-                                
+                        Prenda prendaSeleccionada = inventario.obtenerPrendaPorId(idStr);
+                        if (prendaSeleccionada != null) {
+                            System.out.print("Ingrese la cantidad a vender: ");
+                            int cantidadVenta = scanner.nextInt();
+                            scanner.nextLine(); 
+
+                            if (cantidadVenta <= prendaSeleccionada.getCantidad()) {
+                                inventario.disminuirCantidadPrenda(idStr, cantidadVenta);
+                                inventarioVenta.agregarPrenda(new Prenda(prendaSeleccionada.getTipo(), prendaSeleccionada.getTamaño(), prendaSeleccionada.getGenero(), prendaSeleccionada.getPrecioCompra(), cantidadVenta));
+                                System.out.println("Vendiendo: " + cantidadVenta + " de " + prendaSeleccionada.toStringVenta());
+                                totalVenta += prendaSeleccionada.getPrecioVenta() * cantidadVenta;
                             } else {
-                                System.out.println("No se encontró la prenda con ID: " + idStr);
+                                System.out.println("La cantidad ingresada excede el inventario disponible para esta prenda.");
                             }
+                        } else {
+                            System.out.println("No se encontró la prenda con ID: " + idStr);
                         }
                         System.out.println("Total a pagar hasta ahora: $" + totalVenta);
                         System.out.println("Puede continuar ingresando IDs de prendas a vender, o escriba 'salir' para finalizar la compra:");

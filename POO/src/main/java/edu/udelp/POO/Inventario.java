@@ -47,5 +47,19 @@ public class Inventario {
             prendas.remove(prendaAEliminar);
         }
     }
+    public void disminuirCantidadPrenda(String idPrenda, int cantidad) {
+        for (Prenda prenda : prendas) {
+            if (prenda.getCodigo().equals(idPrenda)) {
+                int nuevaCantidad = prenda.getCantidad() - cantidad;
+                if (nuevaCantidad >= 0) {
+                    prenda.setCantidad(nuevaCantidad);
+                } else {
+                    System.out.println("No hay suficientes prendas en el inventario para realizar esta venta.");
+                }
+                break;
+            }
+        }
+    }
+
 }
 
